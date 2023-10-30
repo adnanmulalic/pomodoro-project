@@ -1,9 +1,10 @@
 function BreakAndSession({ sessionLength, breakLength, updateLength}) {
+    let setSessionLength = sessionLength;
     return (
         <div onClick={updateLength}>
             <div id="session-label">Session Length:
                 <button id="session-increment">Up</button>
-                <span>{sessionLength}</span>
+                <span>{setSessionLength}</span>
                 <button id="session-decrement">Down</button>
             </div>
             <div id="break-label">Break Length:
