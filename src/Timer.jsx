@@ -1,33 +1,25 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
-function Timer({timer}) {
-    let minutes = 0;
-    let seconds = 0;
-    if (timer.sessionSeconds !== 295) {
+function Timer({timer, timerLength}) {
+    
+    let minutes = Math.floor(timer.sessionSeconds / 60);
+    let seconds = timer.sessionSeconds % 60;
+    let currentLabel = "Pomodoro";
+    
+    if (timer.isSessionRunning) {
+        currentLabel = "Pomodoro";
         minutes = Math.floor(timer.sessionSeconds / 60);
-        seconds = timer.sessionSeconds % 60; 
-        console.log("session") 
-    } else {
+        seconds = timer.sessionSeconds % 60;
+    } else if (timer.isBreakRunning){
+        currentLabel = "Break";
         minutes = Math.floor(timer.breakSeconds / 60)
-        minutes = timer.breakSeconds % 60;
-        console.log("break")
+        seconds = timer.breakSeconds % 60;
     }
-
-    function changeListener() {
-        if (timer.sessionSeconds === 295) {
-          console.log("break")
-        }
-      }
-
-    //   useEffect(() => {
-    //     const startStopBtn = document.querySelector("#start-stop");
-    //     console.log(startStopBtn)
-    //   })
 
     return (
         <div>
-            <p>Pomodoro</p>
-            <span id="timer-label">{minutes < 10 && "0"}{minutes} : {seconds < 10 && "0"}{seconds}</span>
+            <p id="timer-label">{currentLabel}</p>
+            <span id="time-left">{minutes < 10 && "0"}{minutes}:{seconds < 10 && "0"}{seconds}</span>
         </div>
     )
 }
