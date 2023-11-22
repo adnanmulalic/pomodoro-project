@@ -92,6 +92,8 @@ function App() {
   }
 
   function resetTimer() {
+    document.querySelector("#beep").pause();
+    document.querySelector("#beep").currentTime = 0;
     startStopBtn.current.innerText = "Start";
     setTimer(defaultTimer);
     setTimerLength(defaultTimerLength)
@@ -106,7 +108,7 @@ function App() {
         startTimer();
       } else {stopTimer()};
     }
-  }  // 21.11.2023 add audio 
+  } 
 
   function changeListener() {
     if (timer.sessionSeconds < 0) {
@@ -118,6 +120,7 @@ function App() {
         setTimer(prev => ({...prev, breakSeconds: prev.breakSeconds - 1}))
       }, 1000);
       intervalRef.current = intervalId;  // https://react.dev/reference/react/useRef
+      document.querySelector("#beep").play();
     } else if (timer.breakSeconds < 0) {
       clearInterval(intervalRef.current); intervalId = null;
       setTimer(prev => ({...prev, breakSeconds: fixedBreakTimer.current * 60, isBreakRunning: false, isSessionRunning: true}));
@@ -127,6 +130,7 @@ function App() {
         setTimer(prev => ({...prev, sessionSeconds: prev.sessionSeconds - 1}))
       }, 1000);
       intervalRef.current = intervalId;  // https://react.dev/reference/react/useRef
+      document.querySelector("#beep").play();
     }
   }
   changeListener()
@@ -134,6 +138,9 @@ function App() {
   return (
     <div id='pomodoro-clock'>
       <h1>Pomodoro Clock</h1>
+      <audio id="beep" >
+        <source src='/clock-alarm-8761.mp3' type='audio/mpeg' />
+      </audio>
       <BreakAndSession timer={timer} timerLength={timerLength} updateLength={updateLength} />
       <Timer timer={timer} timerLength={timerLength}/>
       <button ref={startStopBtn} id='start_stop' onClick={handleTimer}>Start</button>
