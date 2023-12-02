@@ -1,13 +1,12 @@
-import { useEffect, useRef } from "react";
 
-function Timer({timer, timerLength}) {
+function Timer({timer}) {
     
     let minutes = Math.floor(timer.sessionSeconds / 60);
     let seconds = timer.sessionSeconds % 60;
-    let currentLabel = "Pomodoro";
+    let currentLabel = "Session";
     
     if (timer.isSessionRunning) {
-        currentLabel = "Pomodoro";
+        currentLabel = "Session";
         minutes = Math.floor(timer.sessionSeconds / 60);
         seconds = timer.sessionSeconds % 60;
     } else if (timer.isBreakRunning){
@@ -17,7 +16,7 @@ function Timer({timer, timerLength}) {
     }
 
     return (
-        <div>
+        <div id="timer-div">
             <p id="timer-label">{currentLabel}</p>
             <span id="time-left">{minutes < 10 && "0"}{minutes}:{seconds < 10 && "0"}{seconds}</span>
         </div>
