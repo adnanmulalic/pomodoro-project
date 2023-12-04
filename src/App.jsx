@@ -123,7 +123,7 @@ function App() {
   return (
     <>
     <div id='pomodoro-clock'>
-      <h1>25 + 5 clock</h1>
+      <h1>25 + 5 Clock</h1>
       <audio id="beep" >
         <source src='/clock-alarm-8761.mp3' type='audio/mpeg' />
       </audio>
