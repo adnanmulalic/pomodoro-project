@@ -125,7 +125,7 @@ function App() {
     <div id='pomodoro-clock'>
       <h1>25 + 5 Clock</h1>
       <audio id="beep" >
-        <source src='/clock-alarm-8761.mp3' type='audio/mpeg' />
+        <source src='./clock-alarm-8761.mp3' type='audio/mpeg' />
       </audio>
       <BreakAndSession timer={timer} updateLength={updateLength} />
       <Timer timer={timer} />
